@@ -33,6 +33,11 @@ In order to specify the willing action, you must override the default docker com
 - Require for Dump:
   - MONGO_BACKUP_FILENAME
 
+
+- Require for Restore:
+  - MONGO_BACKUP_FILENAME
+
+
 ## Usage
 
 This container is designed to perform operations on a running mongoDB instance.
@@ -49,7 +54,7 @@ If **YOUR_PATH/import.json** is the location of the import file :
                 -e MONGO_PORT=your_port_value \
                 -e MONGO_DB_NAME=your_db_name \
                 -e MONGO_COLLECTION_NAME=your_collection_name \
-                bwnyasse/docker-mongodb-worker \
+                drizztguen77/docker-mongodb-worker \
                 /start.sh -i
 
 
@@ -65,7 +70,7 @@ If **YOUR_PATH/import.json** is the location of the import file :
                 -e MONGO_COLLECTION_NAME=your_collection_name \
                 -e CRON_SCHEDULE=your_cron_schedule \
                 -e MONGO_BACKUP_FILENAME=your_backup_filename_without_extension \
-                bwnyasse/docker-mongodb-worker \
+                drizztguen77/docker-mongodb-worker \
                 /start.sh -e cron
 
 
@@ -78,11 +83,13 @@ If **YOUR_PATH/import.json** is the location of the import file :
                 -e MONGO_DB_NAME=your_db_name \
                 -e MONGO_COLLECTION_NAME=your_collection_name \
                 -e MONGO_BACKUP_FILENAME=your_backup_filename_without_extension \
-                bwnyasse/docker-mongodb-worker \
+                drizztguen77/docker-mongodb-worker \
                 /start.sh -e no-cron
 
 
 ### Dump
+
+- To backup the database
 
 - With cron
 
@@ -92,7 +99,7 @@ If **YOUR_PATH/import.json** is the location of the import file :
                 -e MONGO_PORT=your_port_value \
                 -e CRON_SCHEDULE=your_cron_schedule \
                 -e MONGO_BACKUP_FILENAME=your_backup_filename_without_extension \
-                bwnyasse/docker-mongodb-worker \
+                drizztguen77/docker-mongodb-worker \
                 /start.sh -d cron
 
 
@@ -103,9 +110,21 @@ If **YOUR_PATH/import.json** is the location of the import file :
                 -e MONGO_HOST=your_host_value \
                 -e MONGO_PORT=your_port_value \
                 -e MONGO_BACKUP_FILENAME=your_backup_filename_without_extension \
-                bwnyasse/docker-mongodb-worker \
+                drizztguen77/docker-mongodb-worker \
                 /start.sh -d no-cron
 
+
+### Restore
+
+- To restore the database
+
+
+          docker run \
+                -e MONGO_HOST=your_host_value \
+                -e MONGO_PORT=your_port_value \
+                -e MONGO_BACKUP_FILENAME=your_backup_filename_without_extension \
+                drizztguen77/docker-mongodb-worker \
+                /start.sh -r no-cron
 
 ### Backup Data
 

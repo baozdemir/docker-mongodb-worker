@@ -11,12 +11,13 @@ set -e
 
 echo "Job Dump started: $(date)"
 
-DATE=$(date +%Y%m%d_%H%M%S)
-FILE="/backup/$MONGO_BACKUP_FILENAME-$DATE.tar.gz"
-OUTPUT="dump/"
+#DATE=$(date +%Y%m%d_%H%M%S)
+FILE="/data/backup/$MONGO_BACKUP_FILENAME.tar.gz"
+#OUTPUT="dump/"
 
-mongodump --quiet --host $MONGO_HOST:$MONGO_PORT --out $OUTPUT
-tar -zcvf $FILE $OUTPUT
-rm -rf $OUTPUT
+rm -rf $FILE
+mongodump --quiet --gzip --host $MONGO_HOST:$MONGO_PORT --archive=$FILE
+#tar -zcvf $FILE $OUTPUT
+#rm -rf $OUTPUT
 
 echo "Job Dump finished: $(date)"

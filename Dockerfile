@@ -21,6 +21,10 @@ RUN sed -i 's/\r$//' /dump.sh && chmod +x /dump.sh
 COPY ./import.sh /
 RUN sed -i 's/\r$//' /import.sh && chmod +x /import.sh
 
+# Restore
+COPY ./restore.sh /
+RUN sed -i 's/\r$//' /restore.sh && chmod +x /restore.sh
+
 # Starter
 COPY ./start.sh /
 RUN sed -i 's/\r$//' /start.sh && chmod +x /start.sh
@@ -28,5 +32,5 @@ RUN sed -i 's/\r$//' /start.sh && chmod +x /start.sh
 VOLUME /backup
 VOLUME /tmp/mongodb
 
-#Instanciation of this container must override the command to provide the willing action : Export , Import or Dump
+#Instanciation of this container must override the command to provide the willing action : Export, Import, Dump or Restore
 CMD ["./start.sh"]

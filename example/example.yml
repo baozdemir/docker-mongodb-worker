@@ -73,7 +73,6 @@ services:
     container_name: "db_mongodb_worker_restore"
     command: "/start.sh -r no-cron" # You can use no-cron, depending on your architecture.
     environment:
-      - CRON_SCHEDULE=* * * * * # Every minute ( Just for Example )
       - MONGO_HOST=db_mongodb
       - MONGO_PORT=27017
       - MONGO_DB_NAME=worker
@@ -81,7 +80,7 @@ services:
       - MONGO_BACKUP_FILENAME=backup_dump
     depends_on:
       - db_mongodb
-      - db_mongodb_worker_import
+      - db_mongodb_worker_dump
     volumes:
       - $PWD/data/db:/data/backup/:rw
       - /etc/localtime:/etc/localtime:ro
